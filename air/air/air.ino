@@ -1,10 +1,10 @@
 #include <EEPROM.h>
 
-int val, val1, val2, valveup, valvedown, sensor_preset1, sensor_preset2, sensor_preset3, sensor_preset4, sensor1, sensor2, sensor3, sensor4;
+int  valveup, valvedown, sensor_preset1, sensor_preset2, sensor_preset3, sensor_preset4, sensor1, sensor2, sensor3, sensor4;
 uint32_t timer;
 #define NOT_INITIALIZED -1
 int ledPin = 13;
-int a, b, z, x = 0;
+int a, b;
 bool setup_height;
 int interval = 200;
 
@@ -48,7 +48,6 @@ bool work_fun(bool setup_height, int valveup, int valvedown, int sensor, int sen
   b = sensor_preset + 20;
   if ((sensor <= a - 100) && (conditionlow == 1)) {
     work_valve(valvedown);
-
   }
   else {
     conditionlow = 2;
@@ -76,7 +75,6 @@ bool work_fun(bool setup_height, int valveup, int valvedown, int sensor, int sen
     digitalWrite(13, LOW);
   }
   return true;
-
 }
 void loop() {
   sensor1 = analogRead(16);                 //height sensor value (preset)
@@ -93,9 +91,9 @@ void loop() {
     bool setup_height2 = work_fun(setup_height, 7, 8, sensor2, sensor_preset2) ;
     bool setup_height3 = work_fun(setup_height, 9, 10, sensor3, sensor_preset3) ;
     bool setup_height4 = work_fun(setup_height, 11, 12, sensor4, sensor_preset4) ;
-  
-  if (setup_height1 == 0 && setup_height2 == 0 && setup_height3 == 0 && setup_height4 == 0) {
-    setup_height = false;
-  }
+
+    if (setup_height1 == 0 && setup_height2 == 0 && setup_height3 == 0 && setup_height4 == 0) {
+      setup_height = false;
+    }
   }
 }
